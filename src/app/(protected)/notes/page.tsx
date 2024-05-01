@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react';
 import CreateNote from "@/src/components/createNote";
+import EditNote from '@/src/components/editNote';
 
 function Notes() {
     const [notes, setNotes] = useState<Array<any>>([]);
@@ -15,15 +16,14 @@ function Notes() {
         setNotes([...notes, newNote]);
     };
 
-    const editNote = (id: number, content:string) => {
+    const editNote = (id: number, content: string) => {
         setEditedNoteId(id);
-        setEditedNoteContent(content);
     };
 
-    const saveEditedNote = () => {
+    const saveEditedNote = (content: string) => {
         const updatedNotes = notes.map(note => {
             if (note.id === editedNoteId) {
-                return { ...note, content: editedNoteContent };
+                return { ...note, content: content };
             }
             return note;
         });
@@ -49,27 +49,16 @@ function Notes() {
                     <ul className="list-group">
                         {notes.map(note => (
                             <li className="list-group-item d-flex justify-content-between align-items-center" key={note.id}>
-                                {editedNoteId === note.id ? (
-                                    <textarea
-                                        value={editedNoteContent}
-                                        onChange={(e) => setEditedNoteContent(e.target.value)}
-                                        onBlur={saveEditedNote}
-                                        className='default-textarea'
+                                <span>{note.content}</span>
+
+                                <div style={{ display: 'flex' }}>
+                                    <EditNote
+                                        content={note.content}
+                                        editNote={editNote}
                                     />
-                                ) : (
-                                    <span>{note.content}</span>
-                                )}
-                                <div>
-                                    {editedNoteId === note.id ? (
-                                        <button className="btn btn-success btn-sm" onClick={saveEditedNote} style={{marginLeft: 10}}><i className='icon-pencil'></i></button>
-                                    ) : (
-                                        <div style={{display: 'flex'}}>
-                                            <button className="btn btn-info btn-sm" onClick={() => editNote(note.id, note.content)}><i className='icon-pencil'></i></button>
-                                            <button className="btn btn-danger btn-sm" onClick={() => deleteNote(note.id)} style={{marginLeft: 10}}><i className='icon-trash'></i></button>
-                                        </div>
-                                        
-                                    )}
-                                    
+                                    <button className="btn btn-danger btn-sm" onClick={() => deleteNote(note.id)} style={{ marginLeft: 10 }}>
+                                        <i className='icon-trash'></i>
+                                    </button>
                                 </div>
                             </li>
                         ))}

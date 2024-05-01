@@ -1,30 +1,26 @@
 import React, { useState } from 'react';
 
-function CreateNote({ addNote }) {
-    const [showNoteCreateModal, setNoteCreateModal] = useState(false);
-    const [noteCreateInputValue, setNoteCreateInputValue] = useState('');
+function EditNote({ editNote, content }) {
+    const [showNoteEditModal, setNoteEditModal] = useState(false);
+    const [noteEditInputValue, setNoteEditInputValue] = useState(content);
 
-    const toggleNoteCreateModal = () => {
-        setNoteCreateModal(!showNoteCreateModal)
-    }
+    const toggleNoteEditModal = () => {
+        setNoteEditModal(!showNoteEditModal);
+    };
 
-    const handleCreateNote = () => {
-        addNote(noteCreateInputValue);
-        setNoteCreateInputValue('');
-        toggleNoteCreateModal();
-    }
+    const handleEditNote = () => {
+        editNote(noteEditInputValue);
+        setNoteEditInputValue(content)
+        toggleNoteEditModal();
+    };
 
     return (
         <div>
-            <button
-                onClick={toggleNoteCreateModal}
-                style={{ marginBottom: 15 }}
-                className="btn btn-success btn-sm"
-            >
-                Create New Note
+            <button className="btn btn-success btn-sm" onClick={toggleNoteEditModal} style={{ marginLeft: 10 }}>
+                <i className='icon-pencil'></i>
             </button>
 
-            {showNoteCreateModal && (
+            {showNoteEditModal && (
                 <div
                     className="modal fade default-modal show"
                     tabIndex={-1}
@@ -38,7 +34,7 @@ function CreateNote({ addNote }) {
                             <div className="modal-body">
                                 <div className="d-flex mb-3">
                                     <div>
-                                        <h6 className="mb-0">Create Note</h6>
+                                        <h6 className="mb-0">Edit Note</h6>
                                     </div>
                                 </div>
                                 <form className="form-auth-small m-t-20">
@@ -49,17 +45,17 @@ function CreateNote({ addNote }) {
                                         <textarea
                                             placeholder='Type Your Note'
                                             className="default-textarea"
-                                            value={noteCreateInputValue}
-                                            onChange={(e) => setNoteCreateInputValue(e.target.value)}
+                                            value={noteEditInputValue}
+                                            onChange={(e) => setNoteEditInputValue(e.target.value)}
                                         />
                                     </div>
                                 </form>
                                 <div className="align-right">
-                                    <button onClick={toggleNoteCreateModal} className="btn btn-default">
+                                    <button onClick={toggleNoteEditModal} className="btn btn-default">
                                         Cancel
                                     </button>
-                                    <button onClick={handleCreateNote} className="btn btn-success" style={{ marginLeft: 10 }}>
-                                        Create Note
+                                    <button onClick={handleEditNote} className="btn btn-success" style={{ marginLeft: 10 }}>
+                                        Edit Note
                                     </button>
                                 </div>
                             </div>
@@ -72,4 +68,4 @@ function CreateNote({ addNote }) {
     );
 }
 
-export default CreateNote;
+export default EditNote;

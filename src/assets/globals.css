@@ -10638,30 +10638,30 @@ hr {
   color: #FFFFFF;
   background: #e25985;
 }
-.theme-blush .sidebar-nav .metismenu > li.active > a {
+.sidebar-nav .metismenu > li.active > a {
   color: #e25985;
 }
-.theme-blush .sidebar-nav .metismenu > li.active > a i {
+.sidebar-nav .metismenu > li.active > a i {
   background: #e25985;
   color: #FFFFFF;
 }
-.theme-blush .sidebar-nav .metismenu > li ul .active a {
+.sidebar-nav .metismenu > li ul .active a {
   color: #e25985;
 }
-.theme-blush .sidebar-nav .metismenu a:hover,
-.theme-blush .sidebar-nav .metismenu a:focus {
+.sidebar-nav .metismenu a:hover,
+.sidebar-nav .metismenu a:focus {
   color: #e25985;
 }
-.theme-blush .sidebar-nav .metismenu a:hover i,
-.theme-blush .sidebar-nav .metismenu a:focus i {
+.sidebar-nav .metismenu a:hover i,
+.sidebar-nav .metismenu a:focus i {
   background: #e25985;
   color: #FFFFFF;
 }
-.theme-blush .sidebar-nav .metismenu a:hover:after,
-.theme-blush .sidebar-nav .metismenu a:focus:after {
+.sidebar-nav .metismenu a:hover:after,
+.sidebar-nav .metismenu a:focus:after {
   color: #e25985;
 }
-.theme-blush .sidebar-nav .metismenu ul a:hover::before {
+.sidebar-nav .metismenu ul a:hover::before {
   background: #e25985;
 }
 .theme-blush .card .header h2 {
@@ -11318,6 +11318,9 @@ hr {
   background: #282b2f;
   color: #a5a8ad;
   overflow-y: hidden;
+  border: rgba(255, 255, 255, 0.1) 1px solid;
+  border-radius: .3rem;
+  padding: 8px;
 }
 
 .settings-button {
