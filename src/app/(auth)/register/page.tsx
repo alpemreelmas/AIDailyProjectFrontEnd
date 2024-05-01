@@ -1,13 +1,13 @@
-"use client"
-import React, { useState } from 'react';
+import React from 'react';
 import Link from "next/link";
+import {auth} from "@/auth";
 
-function Register(props:{}) {
+async function Register(props:{}) {
   return (
     <div className="auth-main particles_js">
       <div className="auth_div vivify popIn">
         <div className="auth_brand">
-          <a className="navbar-brand" href="javascript:void(0);">
+          <a className="navbar-brand" href="#">
             AI Daily
           </a>
         </div>
@@ -27,7 +27,7 @@ function Register(props:{}) {
                     type="password"
                     className="form-control round"
                     placeholder="Password"
-                    value={props.password}
+                    /*value={props.password}*/
                 />
               </div>
               <div className="form-group">
@@ -35,8 +35,8 @@ function Register(props:{}) {
                     type="password"
                     className="form-control round"
                     placeholder="Verify Password"
-                    value={verifyPassword}
-                    onChange={(e) => setVerifyPassword(e.target.value)}
+                    /*value={verifyPassword}
+                    onChange={(e) => setVerifyPassword(e.target.value)}*/
                 />
               </div>
               <button type="submit" className="btn btn-primary btn-round btn-block">
@@ -53,4 +53,4 @@ function Register(props:{}) {
   );
 }
 
-export default Page;
+export default Register;

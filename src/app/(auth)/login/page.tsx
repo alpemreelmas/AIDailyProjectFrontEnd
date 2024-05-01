@@ -4,12 +4,11 @@ import Link from "next/link";
 import {login} from "@/src/actions/auth/login";
 import {loginSchema} from "@/src/lib/schemas/loginSchema";
 import {ZodError} from "zod";
-import Response from "@/src/components/response"
+import Alert from "@/src/components/alert"
 
 
 
 function Page() {
-
   const [errors, setErrors] = useState<string[]>([])
   const [formData, setFormData] = useState<{ email: string; password: string }>({
     email: '',
@@ -24,14 +23,15 @@ function Page() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    loginFormSubmit(formData);
+    loginFormSubmit(formData)
   };
 
   async function loginFormSubmit(data: { email: string; password: string }){
     setErrors([])
     try {
       const { email, password } = await loginSchema.parseAsync(formData)
-      await login(email,password)
+      const res = await login(email,password)
+      if(res)  setErrors([res.error])
     }catch (e) {
       if(e instanceof ZodError){
         var messages: string[] = [];
@@ -49,7 +49,7 @@ function Page() {
           <div className="card">
             <div className="body">
               <p className="lead">Login to your account</p>
-              {errors.length > 0 && (<Response messages={errors} type={"danger"} />)}
+              {errors.length > 0 && (<Alert messages={errors} type={"danger"} />)}
               <form className="form-auth-small m-t-20" onSubmit={handleSubmit}>
                 <div className="form-group">
                   <label htmlFor="signin-email" className="control-label sr-only">Email</label>

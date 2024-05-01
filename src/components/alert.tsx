@@ -1,11 +1,11 @@
 import React from 'react';
 
-interface IResponse {
+interface IAlert {
        messages: string[],
        type: string
 }
 
-const Response : React.FC<IResponse> = (props) => {
+const Alert : React.FC<IAlert> = (props) => {
        return (
            <div className={`alert alert-${props.type} p-2 m-2 text-left`} role="alert">
                {props.messages.map((err, index) => (
@@ -15,4 +15,4 @@ const Response : React.FC<IResponse> = (props) => {
        );
 }
 
-export default Response;
+export default Alert;

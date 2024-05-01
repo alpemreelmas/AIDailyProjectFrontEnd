@@ -1,12 +1,8 @@
-import NextAuth, {AuthError, CredentialsSignin} from "next-auth"
+import NextAuth from "next-auth"
 import Credentials from "next-auth/providers/credentials"
 import axiosInstance from "@/src/lib/axiosInstance";
 
-class InvalidLoginError extends CredentialsSignin {
-    code = "Invalid identifier or password"
-}
-
-export const { handlers, signIn, signOut, auth } = NextAuth({
+export const { handlers: {GET, POST}, auth,signIn } = NextAuth({
     providers: [
         Credentials({
             credentials: {
@@ -14,14 +10,25 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 password: {},
             },
             authorize: async (credentials) => {
-                    let response = await axiosInstance.post("/auth/login",credentials);
+                    /*let response = await axiosInstance.post("/auth/login",credentials);*/
+                    let response = await fetch(`${process.env.API_URL}/auth/login`,{
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(credentials)
+                    })
+                    const user = await response.json();
 
-                    if (response.data.is_error) {
-                        return { error: 'my custom error' };
+                    if (!response.ok) {
+                        return null
                     }
-
-                    return response.data.data
+                    return user.data
             },
         }),
     ],
+    session: {strategy: "jwt"},
+    pages:{
+        signIn: "/login"
+    }
 })

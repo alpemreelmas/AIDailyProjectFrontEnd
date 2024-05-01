@@ -3,7 +3,10 @@ import axios from "axios";
 const axiosInstance = axios.create({
     baseURL: process.env.API_URL,
     timeout: 1000,
-    headers: {'Content-Type': 'application/json'}
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept' : "*/*"
+    }
 });
 
 axiosInstance.interceptors.request.use(function (config) {
