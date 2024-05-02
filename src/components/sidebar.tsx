@@ -1,6 +1,8 @@
-import React from 'react';
+'use client'
+import React, { useState } from 'react';
 import Link from "next/link";
 import Image from "next/image";
+import ProfileDropdown from './profileDropdown';
 
 function Sidebar() {
     return (
@@ -30,41 +32,8 @@ function Sidebar() {
                 <div className="dropdown">
 
                     <span>Welcome,</span>
-                        <a
-                        href="javascript:void(0);"
-                        className="dropdown-toggle user-name"
-                        data-toggle="dropdown"
-                        >
-                            <strong>Louis Pierce</strong>
-                        </a>
 
-                    <ul className="dropdown-menu dropdown-menu-right account vivify flipInY">
-                    <li>
-                        <a href="{{route('pages.profile')}}">
-                        <i className="icon-user" />
-                        My Profile
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{route('email.inbox')}}">
-                        <i className="icon-envelope-open" />
-                        Messages
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0);">
-                        <i className="icon-settings" />
-                        Settings
-                        </a>
-                    </li>
-                    <li className="divider" />
-                    <li>
-                        <a href="{{route('authentication.login')}}">
-                        <i className="icon-power" />
-                        Logout
-                        </a>
-                    </li>
-                    </ul>
+                    <ProfileDropdown />
 
                 </div>
                 </div>

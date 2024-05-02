@@ -11354,6 +11354,10 @@ hr {
   opacity: 0;
 }
 
+.dropdown-menu {
+  display: block;
+}
+
 @keyframes slideIn {
   from {
     top: -3%;
